@@ -1,7 +1,5 @@
-package com.example;
+package com.istech;
 
-import com.example.InsufficientFundsException;
-import com.example.Account;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
@@ -66,4 +64,31 @@ class ATMTest {
         assertTrue(history.contains("DEPOSIT: 100.00"));
         assertTrue(history.contains("WITHDRAW: 50.00"));
     }
+
+    @Test
+    @DisplayName("Снятие отрицательной суммы должно вызывать IllegalArgumentException")
+    void testWithdrawNegativeAmount() {
+        atm.createAccount("ACC_NEG");
+        // Положим на счет 500.00, чтобы не было недостатка средств
+        atm.deposit("ACC_NEG", new BigDecimal("500.00"));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> atm.withdraw("ACC_NEG", new BigDecimal("-100.00")),
+                "Ожидается IllegalArgumentException при попытке снять отрицательную сумму"
+        );
+    }
+
+    @Test
+    @DisplayName("Пополнение отрицательной суммы должно вызывать IllegalArgumentException")
+    void testDepositNegativeAmount() {
+        atm.createAccount("ACC_NEG_DEP");
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> atm.deposit("ACC_NEG_DEP", new BigDecimal("-50.00")),
+                "Ожидается IllegalArgumentException при попытке пополнить на отрицательную сумму"
+        );
+    }
+
 }

@@ -3,7 +3,7 @@ plugins {
     id 'application' // Чтобы можно было запустить main класс
 }
 
-group 'com.example'
+group 'com.atm'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -16,7 +16,10 @@ dependencies {
 }
 
 // Точка входа (main class) для приложения
-mainClassName = 'com.example.System'
+application {
+    mainClass.set('com.atm.ATMConsole')
+}
+
 
 // Настраиваем кодировку
 tasks.withType(JavaCompile) {

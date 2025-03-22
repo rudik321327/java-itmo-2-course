@@ -1,4 +1,4 @@
-package com.example;
+package com.istech;
 
 
 public class InsufficientFundsException extends Exception {

@@ -1,7 +1,4 @@
-package com.example;
-
-import com.example.InsufficientFundsException;
-import com.example.Account;
+package com.istech;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -17,6 +14,10 @@ public class ATM {
      * @return created object Account
      */
     public Account createAccount(String accountNumber) {
+        if (accounts.containsKey(accountNumber)) {
+            throw new IllegalArgumentException("Счёт с номером " + accountNumber + " уже существует.");
+        }
+
         Account account = new Account(accountNumber);
         accounts.put(accountNumber, account);
         return account;
