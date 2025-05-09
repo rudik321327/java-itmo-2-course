@@ -28,42 +28,25 @@ public class MainApp {
 
             String choice = sc.nextLine();
             switch (choice) {
-                case "1":
-                    petCtrl.createPet();
-                    break;
-                case "2":
-                    petCtrl.listPets();
-                    break;
-                case "3":
-                    petCtrl.getPetById();
-                    break;
-                case "4":
-                    petCtrl.updatePet();
-                    break;
-                case "5":
-                    petCtrl.deletePet();
-                    break;
-                case "6":
-                    ownerCtrl.createOwner();
-                    break;
-                case "7":
-                    ownerCtrl.listOwners();
-                    break;
-                case "8":
-                    ownerCtrl.getOwnerById();
-                    break;
-                case "9":
-                    ownerCtrl.updateOwner();
-                    break;
-                case "10":
+                case "1"  -> petCtrl.createPet();
+                case "2" -> petCtrl.listPets();
+                case "3" -> petCtrl.getPetById();
+                case "4" -> petCtrl.updatePet();
+                case "5" -> petCtrl.deletePet();
+                case "6" -> ownerCtrl.createOwner();
+                case "7" -> ownerCtrl.listOwners();
+                case "8" -> ownerCtrl.getOwnerById();
+                case "9" -> ownerCtrl.updateOwner();
+                case "10" -> {
                     ownerCtrl.deleteOwner();
                     break;
-                case "0":
+                }
+                case "0" -> {
                     JPAUtil.close();
                     System.out.println("Выход.");
                     System.exit(0);
-                default:
-                    System.out.println("Неверный выбор, попробуйте снова.");
+                }
+                default -> System.out.println("Неверный выбор, попробуйте снова.");
             }
         }
     }

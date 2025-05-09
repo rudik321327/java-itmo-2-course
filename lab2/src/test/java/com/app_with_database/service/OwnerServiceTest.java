@@ -16,7 +16,8 @@ class OwnerServiceTest {
     @BeforeEach void init() { MockitoAnnotations.openMocks(this); }
 
     @Test void createValid() {
-        Owner o = new Owner(); o.setName("Ivan"); o.setBirthDate(LocalDate.of(1980,1,1));
+        Owner o = new Owner(); o.setName("Ivan");
+        o.setBirthDate(LocalDate.of(1980,1,1));
         when(dao.save(o)).thenReturn(o);
         assertEquals("Ivan", service.create(o).getName());
     }
