@@ -1,10 +1,9 @@
-# .github/workflows/ci.yml
-name: Java CI
+name: Java CI
 
 on:
   push:
-    branches: [ "**" ]           # реагируем на все ветки
-  pull_request:                  # плюс PR‑ы
+    branches: [ "**" ]
+  pull_request:
     branches: [ "**" ]
 
 jobs:
@@ -12,28 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Клонируем репозиторий + вытягиваем LFS‑объекты (если есть)
       - name: Checkout sources
         uses: actions/checkout@v4
         with:
-          lfs: true              # нужен, если gradle-wrapper.jar хранится в Git LFS
+          lfs: true
 
-      # 2. Проверяем wrapper: подпись, checksum, наличие Jar
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v3
         with:
-          allow-no-wrapper: false  # true → пропустить отсутствие JAR‑а
+          min-wrapper-count: 1      
+          allow-snapshots: false    
+          allow-checksums: true      
 
-      # 3. Ставим Temurin JDK 21 + включаем кеш Gradle
-      - name: Set up JDK 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
-          cache: gradle           # автоматически кеширует ~/.gradle
+          cache: gradle
 
-      # 4. Запускаем сборку (gradle/gradle-build-action выставит executable‑флаг для gradlew)
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
-          arguments: build        # можно добавить --scan, --info и т.д.
+          arguments: build
