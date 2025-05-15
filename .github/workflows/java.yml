@@ -12,11 +12,11 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - name: Validate Gradle wrapper
-        run: cd lab3 && ./gradlew wrapperValidation
-
       - name: Make Gradle wrapper executable
         run: chmod +x lab3/gradlew
+
+      - name: Validate Gradle wrapper
+        run: cd lab3 && ./gradlew wrapperValidation
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
