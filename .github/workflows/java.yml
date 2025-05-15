@@ -13,12 +13,10 @@ jobs:
           fetch-depth: 0
 
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-        working-directory: lab3   # изменено с lab2 на lab3
+        run: cd lab3 && ./gradlew wrapperValidation
 
       - name: Make Gradle wrapper executable
-        run: chmod +x gradlew
-        working-directory: lab3   # изменено
+        run: chmod +x lab3/gradlew
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -28,7 +26,4 @@ jobs:
           cache: gradle
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: build
-        working-directory: lab3   # изменено
+        run: cd lab3 && ./gradlew build
