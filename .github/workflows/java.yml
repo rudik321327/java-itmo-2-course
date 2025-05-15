@@ -29,6 +29,4 @@ jobs:
           cache: gradle
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: build
+        run: ./gradlew build
