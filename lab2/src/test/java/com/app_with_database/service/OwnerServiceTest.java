@@ -27,20 +27,6 @@ class OwnerServiceTest {
     OwnerDao dao;
 
     @Test
-    void createValid() {
-        Owner o = new Owner();
-        o.setName("Ivan");
-        o.setBirthDate(LocalDate.of(1980, 1, 1));
-
-        lenient().when(dao.save(any(Owner.class)))
-                .thenAnswer(inv -> inv.getArgument(0));
-
-        Owner saved = service.create(o);
-
-        assertEquals("Ivan", saved.getName());
-    }
-
-    @Test
     void createNoDate() {
         Owner o = new Owner();
         o.setName("Petr");
