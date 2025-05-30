@@ -9,6 +9,7 @@ jobs:
       run:
         working-directory: lab2  
 
+
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
@@ -28,6 +29,5 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: gradle
-
       - name: Build with Gradle
         run: ./gradlew build

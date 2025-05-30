@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application' // Чтобы можно было запустить main класс
+}
+
+group 'com.atm'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Зависимости для тестов
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+}
+
+// Точка входа (main class) для приложения
+application {
+    mainClass.set('com.atm.ATMConsole')
+}
+
+
+// Настраиваем кодировку
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Включаем JUnit 5
+test {
+    useJUnitPlatform()
+}
+
+// Генерация JavaDoc
+javadoc {
+    options.encoding = 'UTF-8'
+    options.author true
+    options.version true
+}
+
+tasks.named('assemble') {
+    dependsOn javadoc
+}
+
+tasks.named('build') {
+    dependsOn javadoc
+}
