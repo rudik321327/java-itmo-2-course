@@ -26,4 +26,25 @@ public class OwnerService {
                 .collect(Collectors.toList());
         return new OwnerDTO(owner.getId(), owner.getName(), catNames);
     }
+
+    public OwnerDTO createOwner(OwnerDTO ownerDTO) {
+        Owner owner = new Owner();
+        owner.setName(ownerDTO.getName());
+        Owner savedOwner = ownerRepository.save(owner);
+        return new OwnerDTO(savedOwner.getId(), savedOwner.getName(), null);
+    }
+
+    public OwnerDTO updateOwner(Long id, OwnerDTO ownerDTO) {
+        Owner owner = ownerRepository.findById(id).orElseThrow();
+        owner.setName(ownerDTO.getName());
+        Owner updatedOwner = ownerRepository.save(owner);
+        List<String> catNames = updatedOwner.getCats() != null ?
+                updatedOwner.getCats().stream().map(cat -> cat.getName()).collect(Collectors.toList()) :
+                null;
+        return new OwnerDTO(updatedOwner.getId(), updatedOwner.getName(), catNames);
+    }
+
+    public void deleteOwner(Long id) {
+        ownerRepository.deleteById(id);
+    }
 }
